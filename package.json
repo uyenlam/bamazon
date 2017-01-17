@@ -1,0 +1,24 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "bamazon homework 10 northwestern coding bootcamp",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uyenlam/bamazon.git"
+  },
+  "author": "Uyen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uyenlam/bamazon/issues"
+  },
+  "homepage": "https://github.com/uyenlam/bamazon#readme",
+  "dependencies": {
+    "cli-table": "^0.3.1",
+    "inquirer": "^2.0.0",
+    "mysql": "^2.12.0"
+  }
+}

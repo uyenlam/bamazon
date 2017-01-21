@@ -136,97 +136,97 @@ var customerPage = function() {
             })
         })
     }
-}
+// }
 
-connectToDb().then(function(){
-	console.log('you\'re connected as ' + connection.threadId);
-	return showAllProducts();
-}).then(function(products){
-	return takeOrder(products);
-}.then(function(product){
-	if (!product){
-		// choose another product
-	} else {
-		return getQuantity(product).then(function(requested_quantity){
-			var db_quantity;
-			if (product.stock_quantity >= requested_quantity){
-				// do the transaction
-				// return a promise here
-				db_quantity = prduct.stock_quantity - requested_quantity;
-				items_sold = requested_quantity + product.product_sales;
-				return changeStock(product.item_id,db_quantity).then(function(){
-					console.log("Congratulations, you are the new proud owner of " + requested_quantity + '' 
-					+ product.product_name + '(s) for $' + (requested_quantity*product.price));
+// connectToDb().then(function(){
+// 	console.log('you\'re connected as ' + connection.threadId);
+// 	return showAllProducts();
+// }).then(function(products){
+// 	return takeOrder(products);
+// }.then(function(product){
+// 	if (!product){
+// 		// choose another product
+// 	} else {
+// 		return getQuantity(product).then(function(requested_quantity){
+// 			var db_quantity;
+// 			if (product.stock_quantity >= requested_quantity){
+// 				// do the transaction
+// 				// return a promise here
+// 				db_quantity = prduct.stock_quantity - requested_quantity;
+// 				items_sold = requested_quantity + product.product_sales;
+// 				return changeStock(product.item_id,db_quantity).then(function(){
+// 					console.log("Congratulations, you are the new proud owner of " + requested_quantity + '' 
+// 					+ product.product_name + '(s) for $' + (requested_quantity*product.price));
 					
-				})
-			} else {
-				// don't do the transaction
-			}	
-		});
-	}
-}.then(function(){
-	return showAllProducts();
-}.catch(function(err){ //this is where we catch the failure
-	console.log(err);
-});
+// 				})
+// 			} else {
+// 				// don't do the transaction
+// 			}	
+// 		});
+// 	}
+// }.then(function(){
+// 	return showAllProducts();
+// }.catch(function(err){ //this is where we catch the failure
+// 	console.log(err);
+// });
 
 
 
 
 
 
-function changeStock(item_id, stock_quantity, product_sales){
-	return queryDB('UPDATE products SET stock_quantity = ?, product_sales = ? WHERE item_id = ?',[stock_quantity,product_sales,item_id]);
-}
+// function changeStock(item_id, stock_quantity, product_sales){
+// 	return queryDB('UPDATE products SET stock_quantity = ?, product_sales = ? WHERE item_id = ?',[stock_quantity,product_sales,item_id]);
+// }
 
 
-function connectToDb(){
-	return new Promise(function (success,failure){
-		connection.connect(function(err,res){
-			if (err){
-				failure(err);
-			} else {
-				success();
-			}
-		})
-	})
-}
+// function connectToDb(){
+// 	return new Promise(function (success,failure){
+// 		connection.connect(function(err,res){
+// 			if (err){
+// 				failure(err);
+// 			} else {
+// 				success();
+// 			}
+// 		})
+// 	})
+// }
 
-function queryDb(string,data){
-	return new Promise(function (success, failure){
-		connection.query(string,data,function(err, res){
-			if (err){
-				failure();
-			} else{
-				success(response);
-			}
-		})
-	})
-}
+// function queryDb(string,data){
+// 	return new Promise(function (success, failure){
+// 		connection.query(string,data,function(err, res){
+// 			if (err){
+// 				failure();
+// 			} else{
+// 				success(response);
+// 			}
+// 		})
+// 	})
+// }
 
-function takeOrder(){
-	return inquirer.prompt([{
-		type:'input',
-		name:'item_id',
-		message:'Enter item_id',
-	}]).then(function (answer){
-		return products.find(function(item){
-			return item.item_id == answer.item_id;
-		});
-		if (!product){
-			//error
-		} else {
-			return product;
-		}
-	});
-}
+// function takeOrder(){
+// 	return inquirer.prompt([{
+// 		type:'input',
+// 		name:'item_id',
+// 		message:'Enter item_id',
+// 	}]).then(function (answer){
+// 		return products.find(function(item){
+// 			return item.item_id == answer.item_id;
+// 		});
+// 		if (!product){
+// 			//error
+// 		} else {
+// 			return product;
+// 		}
+// 	});
+// }
 
-function getQuantity(product){ //the product was returned from the then in takeOrder
-	return inquirer.prompt([{
-		type: 'input',
-		name: 'quantity',
-		message: 'How many ' + product.product_name + ' do you want?'
-	}]).then(function(ans){
-		return ans.quantity;
-	});
-}
+// function getQuantity(product){ //the product was returned from the then in takeOrder
+// 	return inquirer.prompt([{
+// 		type: 'input',
+// 		name: 'quantity',
+// 		message: 'How many ' + product.product_name + ' do you want?'
+// 	}]).then(function(ans){
+// 		return ans.quantity;
+// 	});
+// }
